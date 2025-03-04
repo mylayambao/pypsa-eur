@@ -345,7 +345,7 @@ def create_regions(
     # GDP
     logger.info(f"Importing JRC ARDECO GDP data for year {GDP_YEAR}.")
     nuts3_gdp = pd.read_csv(nuts3_gdp, index_col=[0])
-    nuts3_gdp = nuts3_gdp.query("LEVL_CODE == 3 and UNIT == 'EUR'")
+    nuts3_gdp = nuts3_gdp.query("LEVEL_ID == 3 and UNIT == 'EUR'")
     nuts3_gdp.index = nuts3_gdp.index.str.replace("UK", "GB").str.replace("EL", "GR")
     nuts3_gdp = nuts3_gdp[str(GDP_YEAR)]
     regions["gdp"] = nuts3_gdp
@@ -353,7 +353,7 @@ def create_regions(
     # Population
     logger.info(f"Importing JRC ARDECO population data for year {POP_YEAR}.")
     nuts3_pop = pd.read_csv(nuts3_pop, index_col=[0])
-    nuts3_pop = nuts3_pop.query("LEVL_CODE == 3")
+    nuts3_pop = nuts3_pop.query("LEVEL_ID == 3")
     nuts3_pop.index = nuts3_pop.index.str.replace("UK", "GB").str.replace("EL", "GR")
     nuts3_pop = nuts3_pop[str(POP_YEAR)]
     regions["pop"] = nuts3_pop.div(1e3).round(0)
